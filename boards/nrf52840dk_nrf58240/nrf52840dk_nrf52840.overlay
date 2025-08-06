@@ -1,0 +1,42 @@
+&adc {
+        status = "okay";
+    };
+
+/ {
+    analog_joystick: analog-axis {
+        compatible = "analog-axis";
+        poll-period-ms = <20>;
+
+        axis-x {
+            io-channels = <&adc 1>;  // P0.03 = AIN1
+            in-min = <0>;
+            in-max = <1023>;
+            in-deadzone = <0>;
+            zephyr,axis = <INPUT_ABS_X>;
+        };
+
+        axis-y {
+            io-channels = <&adc 2>;  // P0.04 = AIN2
+            in-min = <0>;
+            in-max = <1023>;
+            in-deadzone = <0>;
+            zephyr,axis = <INPUT_ABS_Y>;
+        };
+    };
+
+    joystick_sw: gpio_joystick_sw {
+        compatible = "gpio-keys";
+
+        sw0: sw0 {
+            gpios = <&gpio1 8 (GPIO_PULL_UP | GPIO_ACTIVE_LOW)>;
+            label = "Joystick Button";
+            zephyr,code = <INPUT_KEY_ENTER>;
+        };
+    };
+
+    aliases {
+        joystickbutton = &sw0;
+    };
+};
+
+   
