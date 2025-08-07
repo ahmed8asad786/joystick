@@ -1,0 +1,1 @@
+HALJIA ps2 joystick connected to an nrf58240dk board. A waveshare eink 2.13in is also wired to the same board. Position of joystick updates square cursor on display.
